@@ -20,9 +20,7 @@ export const Header=()=> {
     !user && setAvatar(null)
   },[user,user?.photoURL])
 
-
-console.log(user);
-
+  const fokep = "https://res.cloudinary.com/paksiblog13/image/upload/v1736880697/noFilter_uatjfq.png";
   const toggle = () => setIsOpen(!isOpen);
 
   return (
@@ -30,7 +28,17 @@ console.log(user);
       <Navbar fixed='top' expand="md" 
       className="menu"
       style={{borderBottom:'1px solid gray',backgroundColor:'lightgray'}} >
-        <NavbarBrand href="/"><FaBlog/></NavbarBrand>
+        <NavbarBrand href="/">
+        
+        <img src={fokep}
+        style={{
+          width: '100%',
+          height: '36px',
+          objectFit: 'cover',
+        }}
+      />
+        
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
@@ -49,7 +57,6 @@ console.log(user);
 
           
           </Nav>
-{/* autorizáció*/}
           <Nav navbar>
           { !user ? 
           <>

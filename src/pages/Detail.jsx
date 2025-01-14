@@ -68,12 +68,11 @@ import { useConfirm } from 'material-ui-confirm';
 
      {user && post && (user.uid==post.userId) &&
         <>
-        
+     <button onClick={handleDelete}>DELETE</button>
      <button onClick={()=>navigate('/update/'+post.id)}>📖</button>
      </> 
     }
 
-     <button onClick={handleDelete}>DELETE</button>
      </div>
   )
 }

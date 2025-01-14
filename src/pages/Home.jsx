@@ -10,13 +10,31 @@ export const Home = () => {
   
   return (
     <div className='page'>
-      <div className="d-flex flex-wrap gap-2 justify-content-center align-items-center h-100">
+      <h1 className="text-center mb-4" style={{ color: 'black' }}>Explore Categories</h1>
+      <div className="d-flex flex-wrap gap-4 justify-content-center align-items-center h-100">
       {categories && categories.map(obj=>
-        <Card key={obj.id} style={{width: '15rem',position:'relativ'    }}    >
-        <img       alt="Sample"      src={obj.photoUrl}     />
+        <Card key={obj.id}
+        
+        style={{
+          width: '18rem',
+          borderRadius: '12px',
+          overflow: 'hidden',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          backgroundColor: '#ffffff',
+          position: 'relative',
+        }}    >
+        <img alt="Sample" src={obj.photoUrl}/>
         <CardBody>
-          <CardTitle tag="h5" style={{padding:'10px',position:'absolute',top:'40%',left:0,backgroundColor:'rgba(0,0,0,0.9)',color:'white',width:'100%'}}>
-            <NavLink to={'/posts?ctg='+obj.name}> {obj.name}</NavLink> 
+          <CardTitle tag="h5" style={{
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            color:'white',
+            width:'100%'
+            }}>
+            <NavLink to={'/posts?ctg='+obj.name}
+            style={{
+              textDecoration: 'none',
+              color: '#45a5ff'}}> {obj.name}</NavLink> 
           </CardTitle> 
         </CardBody>
       </Card>

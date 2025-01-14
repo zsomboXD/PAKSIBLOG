@@ -89,41 +89,132 @@ export const AddEditPost = () => {
 console.log(selCateg,story);
 
   return (
-    <div className='page'>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div><label >A bejegyzés címe:</label>
-          <input {...register('title',{required:true})} type='text' />
-          <p className='text-danger'>{errors?.title && 'A cím megadása kötelező'}</p>
-        </div>
-        <CategDropdown categories={categories} setSelCateg={setSelCateg} selCateg={selCateg}/>
+    <div className='page'
 
-        <Story setStory={setStory} uploaded={uploaded}/>
-        <div>
-          <input {...register('file',{
-            required:!params.id,
-            validate:(value)=>{
-                if(!value[0]) return true
-                const acceptedFormats=['jpg','png']
-                //console.log(value[0]);
-                const fileExtension=value[0].name.split('.').pop().toLowerCase()
-                if(!acceptedFormats.includes(fileExtension)) return "Invalid file format"
-                if(value[0].size>1*1000*1024) return "Az engedélyezett máximális file méret 1MB"
-                return true    
-            }
-          })}  type='file'
-          onChange={(e)=>setPhoto(URL.createObjectURL(e.target.files[0]))}
-          />
-         <p className="text-danger">{ errors?.file?.message}</p>
-        <p className="text-danger">{errors?.file && 'Fotó feltöltése kötelező!'}</p>
+      style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      minHeight: '100vh',
+      backgroundColor: '#f4f6f9',
+      padding: '20px',
+      paddingTop: '100px',
+
+    }}>
+
+<div
+        style={{
+          width: '100%',
+          maxWidth: '600px',
+          backgroundColor: '#fff',
+          padding: '20px',
+          borderRadius: '8px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        }}
+      >
       
-        </div>
-        <input  type="submit" disabled={!selCateg || !story}/>
-        </form>
-        {loading && <BarLoader />}
-       {uploaded && <Alerts txt='Sikeres feltöltés!'/>}
-        {photo && <img src={photo} />}
-    </div>
-  )
-}
+      <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#333' }}>
+          {params.id ? 'Szerkesztés' : 'Új bejegyzés hozzáadása'}
+        </h2>
+        <form onSubmit={handleSubmit(onSubmit)} style={{ marginBottom: '20px' }}>
+          {/* Post Title */}
+          <div style={{ marginBottom: '15px' }}>
+            <label style={{ display: 'block', marginBottom: '5px', color: '#555' }}>
+              A bejegyzés címe:
+            </label>
+            <input
+              {...register('title', { required: true })}
+              type="text"
+              placeholder="Cím"
+              style={{
+                width: '100%',
+                padding: '10px',
+                border: '1px solid #ccc',
+                borderRadius: '4px',
+                fontSize: '16px',
+              }}
+            />
+            <p className="text-danger" style={{ color: 'red', fontSize: '14px' }}>
+              {errors?.title && 'A cím megadása kötelező'}
+            </p>
+          </div>
 
+          <CategDropdown
+            categories={categories}
+            setSelCateg={setSelCateg}
+            selCateg={selCateg}
+          />
+
+          <Story setStory={setStory} uploaded={uploaded} />
+
+          <div style={{ marginBottom: '15px' }}>
+            <label style={{ display: 'block', marginBottom: '5px', color: '#555' }}>
+              Fotó feltöltése:
+            </label>
+            <input
+              {...register('file', {
+                required: !params.id,
+                validate: (value) => {
+                  if (!value[0]) return true;
+                  const acceptedFormats = ['jpg', 'png'];
+                  const fileExtension = value[0].name.split('.').pop().toLowerCase();
+                  if (!acceptedFormats.includes(fileExtension)) return 'Invalid file format';
+                  if (value[0].size > 1 * 1000 * 1024)
+                    return 'Az engedélyezett maximális fájlméret 1MB';
+                  return true;
+                },
+              })}
+              type="file"
+              style={{ display: 'block' }}
+              onChange={(e) => setPhoto(URL.createObjectURL(e.target.files[0]))}
+            />
+            <p className="text-danger" style={{ color: 'red', fontSize: '14px' }}>
+              {errors?.file?.message}
+            </p>
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <input
+              type="submit"
+              value="Mentés"
+              disabled={!selCateg || !story}
+              style={{
+                backgroundColor: '#007bff',
+                color: '#fff',
+                padding: '10px 20px',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '16px',
+              }}
+            />
+          </div>
+        </form>
+
+        {loading && (
+          <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <BarLoader color="#007bff" />
+          </div>
+        )}
+
+        {uploaded && <Alerts txt="Sikeres feltöltés!" />}
+
+        {photo && (
+          <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <img
+              src={photo}
+              alt="Preview"
+              style={{
+                maxWidth: '100%',
+                height: 'auto',
+                borderRadius: '8px',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+              }}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
