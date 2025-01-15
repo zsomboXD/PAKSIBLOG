@@ -33,7 +33,8 @@ export const Header=()=> {
         <img src={fokep}
         style={{
           width: '100%',
-          height: '36px',
+          height: '36v
+          px',
           objectFit: 'cover',
         }}
       />
