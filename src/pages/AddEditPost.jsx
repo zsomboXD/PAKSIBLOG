@@ -16,6 +16,7 @@ import { useEffect } from 'react'
 
 
 export const AddEditPost = () => {
+  console.log(useContext(CategContext));
   const {categories}=useContext(CategContext)
   const {user}=useContext(UserContext)
   const [loading,setLoading]=useState(false)

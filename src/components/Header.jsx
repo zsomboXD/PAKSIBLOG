@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import {  Collapse,  Navbar,  NavbarToggler,  NavbarBrand,  Nav,  NavItem,   UncontrolledDropdown,  DropdownToggle,  DropdownMenu,
-  DropdownItem,  NavbarText,} from 'reactstrap';
+import { Link, NavLink, Outlet } from 'react-router-dom';
+import {  Collapse,  NavbarToggler,  NavbarBrand,  Nav,  NavItem,   UncontrolledDropdown,  DropdownToggle,  DropdownMenu,
+  DropdownItem,  NavbarText,
+  Navbar,} from 'reactstrap';
 import { FaBlog } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
 import { useContext } from 'react';
@@ -61,7 +62,7 @@ export const Header=()=> {
           { !user ? 
           <>
             <NavItem>
-              <NavLink className="nav-link" to='/auth/in'>Belépés</NavLink>
+              <Link className="nav-link" to='/auth/in'>Belépés</Link>
             </NavItem>
             <NavItem>
               <NavLink className="nav-link" to='/auth/up'>Regisztráció</NavLink>
